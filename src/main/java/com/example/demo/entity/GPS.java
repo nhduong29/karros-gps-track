@@ -20,7 +20,7 @@ public class GPS {
 
 	private String name;
 
-	private String desc;
+	private String description;
 
 	private String author;
 
@@ -33,11 +33,16 @@ public class GPS {
 	@OneToMany(mappedBy = "gps")
 	private Set<WayPoint> waypoints = new HashSet<>();
 
-	public GPS(Long id, String name, String desc, String author, File flie, Set<Track> tracks, Set<WayPoint> waypoints) {
+	public GPS() {
+		super();
+	}
+
+	public GPS(Long id, String name, String description, String author, File flie, Set<Track> tracks,
+			Set<WayPoint> waypoints) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.desc = desc;
+		this.description = description;
 		this.author = author;
 		this.flie = flie;
 		this.tracks = tracks;
@@ -60,12 +65,12 @@ public class GPS {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getAuthor() {

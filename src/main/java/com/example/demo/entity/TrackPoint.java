@@ -17,7 +17,7 @@ public class TrackPoint {
 
 	private String name;
 
-	private String desc;
+	private String description;
 
 	private Number latitude;
 
@@ -29,12 +29,16 @@ public class TrackPoint {
 	@JoinColumn(name = "track_segment_id", nullable = false)
 	private TrackSegment trackSegment;
 
-	public TrackPoint(Long id, String name, String desc, Number latitude, Number longitude, Number elevation,
+	public TrackPoint() {
+		super();
+	}
+
+	public TrackPoint(Long id, String name, String description, Number latitude, Number longitude, Number elevation,
 			TrackSegment trackSegment) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.desc = desc;
+		this.description = description;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.elevation = elevation;
@@ -57,12 +61,12 @@ public class TrackPoint {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Number getLatitude() {

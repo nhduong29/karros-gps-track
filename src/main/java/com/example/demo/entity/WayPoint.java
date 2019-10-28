@@ -17,7 +17,7 @@ public class WayPoint {
 
 	private String name;
 
-	private String desc;
+	private String description;
 
 	private Number latitude;
 
@@ -29,11 +29,16 @@ public class WayPoint {
 	@JoinColumn(name = "gps_id", nullable = false)
 	private GPS gps;
 
-	public WayPoint(Long id, String name, String desc, Number latitude, Number longitude, Number elevation, GPS gps) {
+	public WayPoint() {
+		super();
+	}
+
+	public WayPoint(Long id, String name, String description, Number latitude, Number longitude, Number elevation,
+			GPS gps) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.desc = desc;
+		this.description = description;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.elevation = elevation;
@@ -56,12 +61,12 @@ public class WayPoint {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Number getLatitude() {

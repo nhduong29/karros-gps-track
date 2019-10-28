@@ -21,7 +21,7 @@ public class Track {
 
 	private String name;
 
-	private String desc;
+	private String description;
 
 	@OneToMany(mappedBy = "track")
 	private Set<TrackSegment> trackSegments = new HashSet<>();
@@ -30,52 +30,56 @@ public class Track {
 	@JoinColumn(name = "gps_id", nullable = false)
 	private GPS gps;
 
-	public Track(Long id, String name, String desc, Set<TrackSegment> trackSegments, GPS gps) {
+	public Track() {
+		super();
+	}
+
+	public Track(Long id, String name, String description, Set<TrackSegment> trackSegments, GPS gps) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.desc = desc;
+		this.description = description;
 		this.trackSegments = trackSegments;
 		this.gps = gps;
 	}
 
-	public final Long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public final void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public final String getName() {
+	public String getName() {
 		return name;
 	}
 
-	public final void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	public final String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public final void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public final Set<TrackSegment> getTrackSegments() {
+	public Set<TrackSegment> getTrackSegments() {
 		return trackSegments;
 	}
 
-	public final void setTrackSegments(Set<TrackSegment> trackSegments) {
+	public void setTrackSegments(Set<TrackSegment> trackSegments) {
 		this.trackSegments = trackSegments;
 	}
 
-	public final GPS getGps() {
+	public GPS getGps() {
 		return gps;
 	}
 
-	public final void setGps(GPS gps) {
+	public void setGps(GPS gps) {
 		this.gps = gps;
 	}
 
