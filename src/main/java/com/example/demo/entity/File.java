@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ public class File {
 
 	private String uploadBy;
 
-	private String uploadDate;
+	private Date uploadDate;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "gps_id", referencedColumnName = "id", nullable = true)
@@ -46,7 +48,7 @@ public class File {
 		this.data = data;
 	}
 
-	public File(String name, String type, byte[] data, String uploadBy, String uploadDate, GPS gps, User user) {
+	public File(String name, String type, byte[] data, String uploadBy, Date uploadDate, GPS gps, User user) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -97,11 +99,11 @@ public class File {
 		this.uploadBy = uploadBy;
 	}
 
-	public String getUploadDate() {
+	public Date getUploadDate() {
 		return uploadDate;
 	}
 
-	public void setUploadDate(String uploadDate) {
+	public void setUploadDate(Date uploadDate) {
 		this.uploadDate = uploadDate;
 	}
 

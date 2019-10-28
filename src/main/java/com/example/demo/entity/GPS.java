@@ -25,7 +25,7 @@ public class GPS {
 	private String author;
 
 	@OneToOne(mappedBy = "gps")
-	private File flie;
+	private File file;
 
 	@OneToMany(mappedBy = "gps")
 	private Set<Track> tracks = new HashSet<>();
@@ -37,16 +37,20 @@ public class GPS {
 		super();
 	}
 
-	public GPS(Long id, String name, String description, String author, File flie, Set<Track> tracks,
-			Set<WayPoint> waypoints) {
+	public GPS(String name, String description, String author, Set<Track> tracks, Set<WayPoint> waypoints) {
 		super();
-		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.author = author;
-		this.flie = flie;
 		this.tracks = tracks;
 		this.waypoints = waypoints;
+	}
+
+	public GPS(String name, String description, String author) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.author = author;
 	}
 
 	public Long getId() {
@@ -81,12 +85,12 @@ public class GPS {
 		this.author = author;
 	}
 
-	public File getFlie() {
-		return flie;
+	public File getFile() {
+		return file;
 	}
 
-	public void setFlie(File flie) {
-		this.flie = flie;
+	public void setFile(File file) {
+		this.file = file;
 	}
 
 	public Set<Track> getTracks() {
