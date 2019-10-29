@@ -43,7 +43,8 @@ public class FileStorageServiceImplement implements FileStorageService {
 			if (fileName.contains("..")) {
 				throw new FileStorageException("Sorry! The path of file is wrong " + fileName);
 			}
-			gpsParserService.getTracksFromFile(file);
+			GPS gps2 = gpsParserService.getTracksFromFile(file);
+			gps2.getWaypoints().forEach(System.out::println);
 
 			File storedFile = new File();
 			User user = new User();
@@ -62,7 +63,7 @@ public class FileStorageServiceImplement implements FileStorageService {
 	}
 
 	@Override
-	public File getFile(String fileId) {
+	public File getFile(Long fileId) {
 		return fileRepository.findById(fileId)
 				.orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
 	}

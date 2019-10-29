@@ -7,5 +7,5 @@ import com.example.demo.entity.File;
 public interface FileStorageService {
 	File storeFile(MultipartFile file);
 
-	File getFile(String fileId);
+	File getFile(Long fileId);
 }

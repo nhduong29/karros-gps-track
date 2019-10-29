@@ -1,11 +1,9 @@
 package com.example.demo.service;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.entity.Track;
+import com.example.demo.entity.GPS;
 
 public interface GPSParserService {
-	List<Track> getTracksFromFile(MultipartFile file);
+	GPS getTracksFromFile(MultipartFile file);
 }
