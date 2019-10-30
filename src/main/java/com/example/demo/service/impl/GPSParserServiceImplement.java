@@ -9,12 +9,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.entity.GPS;
 import com.example.demo.entity.Track;
 import com.example.demo.entity.TrackPoint;
 import com.example.demo.entity.TrackSegment;
 import com.example.demo.entity.WayPoint;
+import com.example.demo.repo.GpsRepository;
 import com.example.demo.service.GPSParserService;
 
 import io.jenetics.jpx.GPX;
@@ -25,9 +27,14 @@ import io.jenetics.jpx.Person;
 public class GPSParserServiceImplement implements GPSParserService {
 	private static final Logger logger = LoggerFactory.getLogger(GPSParserServiceImplement.class);
 
+	private GPS gps = new GPS();
+
+	@Autowired
+	GpsRepository gpsRepository;
+
 	@Override
 	public GPS convertGpsFromFile(MultipartFile file) {
-		GPS gps = new GPS();
+		//GPS gps = new GPS();
 		try {
 			GPX gpxData = GPX.read(file.getInputStream());
 			Optional<Metadata> metadataOptional = gpxData.getMetadata();
@@ -46,16 +53,18 @@ public class GPSParserServiceImplement implements GPSParserService {
 			Set<Track> tracks = gpxData.getTracks().stream().map(jpxTrack -> convertTrack(jpxTrack))
 					.collect(Collectors.toSet());
 			gps.setTracks(tracks);
+			gpsRepository.save(gps);
 			return gps;
 		} catch (IOException e) {
 			logger.error("Can't convert the file, Please check again", e);
 		}
-		return gps;
+		return null;
 
 	}
 
 	private WayPoint convertWaypoint(io.jenetics.jpx.WayPoint wayPoint) {
 		WayPoint point = new WayPoint();
+		point.setGps(gps);
 		point.setDescription(wayPoint.getDescription().orElse(null));
 		point.setLatitude(wayPoint.getLatitude().floatValue());
 		point.setLongitude(wayPoint.getLongitude().floatValue());
@@ -64,28 +73,31 @@ public class GPSParserServiceImplement implements GPSParserService {
 		return point;
 	}
 
-	private TrackPoint convertTrackPoint(io.jenetics.jpx.WayPoint jpxTrackPoint) {
+	private TrackPoint convertTrackPoint(io.jenetics.jpx.WayPoint jpxTrackPoint, TrackSegment segment) {
 		TrackPoint trackPoint = new TrackPoint();
 		trackPoint.setDescription(jpxTrackPoint.getDescription().orElse(null));
 		trackPoint.setElevation(jpxTrackPoint.getElevation().orElse(null));
 		trackPoint.setLatitude(jpxTrackPoint.getLatitude());
 		trackPoint.setLongitude(jpxTrackPoint.getLongitude());
+		trackPoint.setTrackSegment(segment);
 		return trackPoint;
 	}
 
-	private TrackSegment convertTrackSegment(io.jenetics.jpx.TrackSegment jpxSegment) {
-		Set<TrackPoint> trackPoints = jpxSegment.getPoints().stream()
-				.map(jpxTrackPoint -> convertTrackPoint(jpxTrackPoint)).collect(Collectors.toSet());
+	private TrackSegment convertTrackSegment(io.jenetics.jpx.TrackSegment jpxSegment, Track track) {
 		TrackSegment segment = new TrackSegment();
+		Set<TrackPoint> trackPoints = jpxSegment.getPoints().stream()
+				.map(jpxTrackPoint -> convertTrackPoint(jpxTrackPoint, segment)).collect(Collectors.toSet());
 		segment.setTrackPoints(trackPoints);
+		segment.setTrack(track);
 		return segment;
 	}
 
 	private Track convertTrack(io.jenetics.jpx.Track jpxTrack) {
 		Track track = new Track();
+		track.setGps(gps);
 		track.setDescription(jpxTrack.getDescription().orElse(null));
 		track.setName(jpxTrack.getDescription().orElse(null));
-		Set<TrackSegment> segments = jpxTrack.getSegments().stream().map(jpxSegment -> convertTrackSegment(jpxSegment))
+		Set<TrackSegment> segments = jpxTrack.getSegments().stream().map(jpxSegment -> convertTrackSegment(jpxSegment, track))
 				.collect(Collectors.toSet());
 		track.setTrackSegments(segments);
 		return track;

@@ -3,7 +3,9 @@ package com.example.demo.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +30,7 @@ public class Track {
 	@OneToMany(mappedBy = "track")
 	private Set<TrackSegment> trackSegments = new HashSet<>();
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "gps_id", nullable = false)
 	private GPS gps;
 

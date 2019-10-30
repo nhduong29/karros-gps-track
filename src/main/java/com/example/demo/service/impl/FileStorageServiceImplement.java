@@ -63,14 +63,12 @@ public class FileStorageServiceImplement implements FileStorageService {
 			if (fileName.contains("..")) {
 				throw new FileStorageException("Sorry! The path of file is wrong " + fileName);
 			}
-			GPS gps = gpsParserService.convertGpsFromFile(file);
-			gpsRepository.save(gps);
-			wayPointRepository.saveAll(gps.getWaypoints());
-			trackRepository.saveAll(gps.getTracks());
 			File storedFile = new File();
 			User user = new User();
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal instanceof UserDetails) {
+				GPS gps = gpsParserService.convertGpsFromFile(file);
+				//gpsRepository.save(gps);
 				String username = ((CustomUserDetail) principal).getUsername();
 				user = userRepository.findByUsername(username).orElse(new User());
 				storedFile = new File(fileName, file.getContentType(), file.getBytes(), username, new Date(), gps,
