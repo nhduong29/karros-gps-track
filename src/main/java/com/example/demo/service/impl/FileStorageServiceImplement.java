@@ -18,11 +18,7 @@ import com.example.demo.entity.GPS;
 import com.example.demo.entity.User;
 import com.example.demo.repo.FileRepository;
 import com.example.demo.repo.GpsRepository;
-import com.example.demo.repo.TrackPointRepository;
-import com.example.demo.repo.TrackRepository;
-import com.example.demo.repo.TrackSegmentRepository;
 import com.example.demo.repo.UserRepository;
-import com.example.demo.repo.WayPointRepository;
 import com.example.demo.rest.exception.FileNotFoundException;
 import com.example.demo.rest.exception.FileStorageException;
 import com.example.demo.service.FileStorageService;
@@ -37,18 +33,6 @@ public class FileStorageServiceImplement implements FileStorageService {
 
 	@Autowired
 	private UserRepository userRepository;
-
-	@Autowired
-	WayPointRepository wayPointRepository;
-
-	@Autowired
-	TrackPointRepository trackPointRepository;
-
-	@Autowired
-	TrackSegmentRepository segmentRepository;
-
-	@Autowired
-	TrackRepository trackRepository;
 
 	@Autowired
 	GpsRepository gpsRepository;
@@ -68,7 +52,6 @@ public class FileStorageServiceImplement implements FileStorageService {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal instanceof UserDetails) {
 				GPS gps = gpsParserService.convertGpsFromFile(file);
-				//gpsRepository.save(gps);
 				String username = ((CustomUserDetail) principal).getUsername();
 				user = userRepository.findByUsername(username).orElse(new User());
 				storedFile = new File(fileName, file.getContentType(), file.getBytes(), username, new Date(), gps,

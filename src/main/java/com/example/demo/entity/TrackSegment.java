@@ -25,7 +25,7 @@ public class TrackSegment {
 	@JoinColumn(name = "track_id", nullable = false)
 	private Track track;
 
-	@OneToMany(mappedBy = "trackSegment")
+	@OneToMany(mappedBy = "trackSegment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<TrackPoint> trackPoints = new HashSet<>();
 
 	public TrackSegment() {

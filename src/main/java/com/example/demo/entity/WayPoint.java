@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,13 +26,15 @@ public class WayPoint {
 	@Size(max = 10000)
 	private String description;
 
-	private Number latitude;
+	@Column(precision = 10, scale = 8)
+	private BigDecimal latitude;
 
-	private Number longitude;
+	@Column(precision = 11, scale = 8)
+	private BigDecimal longitude;
 
-	private Number elevation;
+	private double elevation;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "gps_id", nullable = false)
 	private GPS gps;
 
@@ -37,8 +42,8 @@ public class WayPoint {
 		super();
 	}
 
-	public WayPoint(Long id, String name, String description, Number latitude, Number longitude, Number elevation,
-			GPS gps) {
+	public WayPoint(Long id, String name, @Size(max = 10000) String description, BigDecimal latitude,
+			BigDecimal longitude, double elevation, GPS gps) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -73,27 +78,27 @@ public class WayPoint {
 		this.description = description;
 	}
 
-	public Number getLatitude() {
+	public BigDecimal getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(Number latitude) {
+	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 
-	public Number getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(Number longitude) {
+	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 
-	public Number getElevation() {
+	public double getElevation() {
 		return elevation;
 	}
 
-	public void setElevation(Number elevation) {
+	public void setElevation(double elevation) {
 		this.elevation = elevation;
 	}
 

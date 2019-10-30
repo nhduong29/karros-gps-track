@@ -27,10 +27,10 @@ public class Track {
 	@Size(max = 10000)
 	private String description;
 
-	@OneToMany(mappedBy = "track")
+	@OneToMany(mappedBy = "track", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<TrackSegment> trackSegments = new HashSet<>();
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "gps_id", nullable = false)
 	private GPS gps;
 
