@@ -4,14 +4,13 @@ import java.util.Date;
 
 public class GpsTrack {
 	private String name;
+	private String description;
 
 	private String uploadBy;
 
 	private Date uploadDate;
 
-	private String description;
-
-	public GpsTrack(String name, String uploadBy, Date uploadDate, String description) {
+	public GpsTrack(String name, String description, String uploadBy, Date uploadDate) {
 		super();
 		this.name = name;
 		this.uploadBy = uploadBy;

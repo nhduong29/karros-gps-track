@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.File;
+import com.example.demo.rest.response.GpsTrack;
 import com.example.demo.service.GpsTrackService;
 
 @RestController
@@ -17,7 +17,7 @@ public class GpsTrackController {
 	private GpsTrackService gpsTrackService;
 
 	@GetMapping("/tracks")
-	public Page<File> getLatestTrack(Pageable pageable) {
+	public Page<GpsTrack> getLatestTrack(Pageable pageable) {
 		return gpsTrackService.getLatestTrack(pageable);
 	}
 }

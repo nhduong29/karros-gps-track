@@ -5,8 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.File;
 import com.example.demo.repo.GpsTrackRepository;
+import com.example.demo.rest.response.GpsTrack;
 import com.example.demo.service.GpsTrackService;
 
 @Service
@@ -15,7 +15,7 @@ public class GpsTrackServiceImplement implements GpsTrackService {
 	GpsTrackRepository gpsTrackRepository;
 
 	@Override
-	public Page<File> getLatestTrack(Pageable pageable) {
+	public Page<GpsTrack> getLatestTrack(Pageable pageable) {
 		return gpsTrackRepository.getLatestTrack(pageable);
 	}
 
