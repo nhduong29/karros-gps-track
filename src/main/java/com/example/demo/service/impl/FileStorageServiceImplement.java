@@ -17,7 +17,12 @@ import com.example.demo.entity.File;
 import com.example.demo.entity.GPS;
 import com.example.demo.entity.User;
 import com.example.demo.repo.FileRepository;
+import com.example.demo.repo.GpsRepository;
+import com.example.demo.repo.TrackPointRepository;
+import com.example.demo.repo.TrackRepository;
+import com.example.demo.repo.TrackSegmentRepository;
 import com.example.demo.repo.UserRepository;
+import com.example.demo.repo.WayPointRepository;
 import com.example.demo.rest.exception.FileNotFoundException;
 import com.example.demo.rest.exception.FileStorageException;
 import com.example.demo.service.FileStorageService;
@@ -34,6 +39,21 @@ public class FileStorageServiceImplement implements FileStorageService {
 	private UserRepository userRepository;
 
 	@Autowired
+	WayPointRepository wayPointRepository;
+
+	@Autowired
+	TrackPointRepository trackPointRepository;
+
+	@Autowired
+	TrackSegmentRepository segmentRepository;
+
+	@Autowired
+	TrackRepository trackRepository;
+
+	@Autowired
+	GpsRepository gpsRepository;
+
+	@Autowired
 	private GPSParserService gpsParserService;
 
 	@Override
@@ -43,12 +63,12 @@ public class FileStorageServiceImplement implements FileStorageService {
 			if (fileName.contains("..")) {
 				throw new FileStorageException("Sorry! The path of file is wrong " + fileName);
 			}
-			GPS gps2 = gpsParserService.getTracksFromFile(file);
-			gps2.getWaypoints().forEach(System.out::println);
-
+			GPS gps = gpsParserService.convertGpsFromFile(file);
+			gpsRepository.save(gps);
+			wayPointRepository.saveAll(gps.getWaypoints());
+			trackRepository.saveAll(gps.getTracks());
 			File storedFile = new File();
 			User user = new User();
-			GPS gps = new GPS("twest", "test des", "suong");
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			if (principal instanceof UserDetails) {
 				String username = ((CustomUserDetail) principal).getUsername();

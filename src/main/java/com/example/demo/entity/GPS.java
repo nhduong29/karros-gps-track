@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "gps")
@@ -20,6 +21,7 @@ public class GPS {
 
 	private String name;
 
+	@Size(max = 10000)
 	private String description;
 
 	private String author;

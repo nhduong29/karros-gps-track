@@ -5,5 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.entity.GPS;
 
 public interface GPSParserService {
-	GPS getTracksFromFile(MultipartFile file);
+	GPS convertGpsFromFile(MultipartFile file);
 }

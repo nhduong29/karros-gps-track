@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "track_point")
@@ -17,6 +18,7 @@ public class TrackPoint {
 
 	private String name;
 
+	@Size(max = 10000)
 	private String description;
 
 	private Number latitude;

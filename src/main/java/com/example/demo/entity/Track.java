@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "track")
@@ -18,9 +19,10 @@ public class Track {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
+	@Size(max = 10000)
 	private String name;
 
+	@Size(max = 10000)
 	private String description;
 
 	@OneToMany(mappedBy = "track")

@@ -26,6 +26,10 @@ public class TrackSegment {
 	@OneToMany(mappedBy = "trackSegment")
 	private Set<TrackPoint> trackPoints = new HashSet<>();
 
+	public TrackSegment() {
+		super();
+	}
+
 	public TrackSegment(Long id, Track track, Set<TrackPoint> trackPoints) {
 		super();
 		this.id = id;
