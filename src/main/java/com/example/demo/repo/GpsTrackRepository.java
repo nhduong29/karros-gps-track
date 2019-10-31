@@ -11,6 +11,6 @@ import com.example.demo.rest.response.GpsTrack;
 
 @Repository
 public interface GpsTrackRepository extends PagingAndSortingRepository<GPS, Long> {
-	@Query(value = "SELECT new com.example.demo.rest.response.GpsTrack(g.id, f.id, g.name,g.description, f.uploadBy, f.uploadDate) FROM File f, GPS g WHERE f.gps=g ORDER BY f.uploadDate DESC")
+	@Query(value = "SELECT new com.example.demo.rest.response.GpsTrack(g.id, f.id, g.name,g.description, f.uploadBy, f.uploadDate) FROM File f, GPS g WHERE f.gps=g")
 	Page<GpsTrack> getLatestTrack(Pageable pageable);
 }
