@@ -4,22 +4,24 @@ import java.util.Date;
 
 public class GpsTrack {
 	private Long id;
+	private Long fileId;
 	private String name;
 	private String description;
 	private String uploadBy;
 	private Date uploadDate;
 
-	public GpsTrack(Long id, String name, String description, String uploadBy, Date uploadDate) {
+	public GpsTrack() {
+		super();
+	}
+
+	public GpsTrack(Long id, Long fileId, String name, String description, String uploadBy, Date uploadDate) {
 		super();
 		this.id = id;
+		this.fileId = fileId;
 		this.name = name;
 		this.description = description;
 		this.uploadBy = uploadBy;
 		this.uploadDate = uploadDate;
-	}
-
-	public GpsTrack() {
-		super();
 	}
 
 	public Long getId() {
@@ -28,6 +30,14 @@ public class GpsTrack {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(Long fileId) {
+		this.fileId = fileId;
 	}
 
 	public String getName() {

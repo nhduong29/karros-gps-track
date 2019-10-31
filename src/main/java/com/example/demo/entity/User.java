@@ -54,7 +54,7 @@ public class User {
 	private Set<Role> roles = new HashSet<>();
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "user", targetEntity = File.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", targetEntity = File.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<File> files = new HashSet<>();
 
 	public User(Long id, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 20) String username,

@@ -30,7 +30,7 @@ public class TrackSegment {
 	private Track track;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "trackSegment", targetEntity = TrackPoint.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "trackSegment", targetEntity = TrackPoint.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<TrackPoint> trackPoints = new HashSet<>();
 
 	public TrackSegment() {

@@ -1,12 +1,10 @@
 package com.example.demo.service.impl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.GPS;
 import com.example.demo.repo.GpsRepository;
+import com.example.demo.rest.response.GpsTrack;
 import com.example.demo.service.GpsService;
 
 @Service
@@ -15,8 +13,8 @@ public class GpsServiceImplement implements GpsService {
 	GpsRepository gpsRepository;
 
 	@Override
-	public Optional<GPS> getGps(Long id) {
-		return gpsRepository.findById(id);
+	public GpsTrack getGpsInformation(Long gpsId) {
+		return gpsRepository.getGpsInformation(gpsId);
 	}
 
 }

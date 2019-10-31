@@ -34,11 +34,11 @@ public class GPS {
 	private File file;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "gps", targetEntity = Track.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "gps", targetEntity = Track.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Track> tracks = new HashSet<>();
 
 	@JsonManagedReference
-	@OneToMany(mappedBy = "gps", targetEntity = WayPoint.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "gps", targetEntity = WayPoint.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<WayPoint> waypoints = new HashSet<>();
 
 	public GPS() {

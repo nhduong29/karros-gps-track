@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.entity.GPS;
 import com.example.demo.rest.response.GpsTrack;
 import com.example.demo.service.GpsService;
 import com.example.demo.service.GpsTrackService;
@@ -32,7 +31,7 @@ public class GpsTrackController {
 
 	@GetMapping("/{gpsId}")
 	public ResponseEntity<?> getGps(@PathVariable Long gpsId) {
-		GPS gps = gpsService.getGps(gpsId).orElse(null);
+		GpsTrack gps = gpsService.getGpsInformation(gpsId);
 		if (Objects.nonNull(gps)) {
 			return ResponseEntity.ok().body(gps);
 		}

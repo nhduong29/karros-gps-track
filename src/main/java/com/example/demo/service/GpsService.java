@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
-import java.util.Optional;
-
-import com.example.demo.entity.GPS;
+import com.example.demo.rest.response.GpsTrack;
 
 public interface GpsService {
-	Optional<GPS> getGps(Long id);
+	GpsTrack getGpsInformation(Long gpsId);
 }
