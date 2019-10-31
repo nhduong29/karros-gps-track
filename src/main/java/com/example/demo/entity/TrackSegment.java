@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "track_segment")
 public class TrackSegment {
@@ -21,11 +24,13 @@ public class TrackSegment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonBackReference
+	@ManyToOne
 	@JoinColumn(name = "track_id", nullable = false)
 	private Track track;
 
-	@OneToMany(mappedBy = "trackSegment", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "trackSegment", targetEntity = TrackPoint.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<TrackPoint> trackPoints = new HashSet<>();
 
 	public TrackSegment() {

@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "gps")
 public class GPS {
@@ -28,13 +30,15 @@ public class GPS {
 
 	private String author;
 
-	@OneToOne(mappedBy = "gps")
+	@OneToOne(cascade = CascadeType.ALL)
 	private File file;
 
-	@OneToMany(mappedBy = "gps", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "gps", targetEntity = Track.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<Track> tracks = new HashSet<>();
 
-	@OneToMany(mappedBy = "gps", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "gps", targetEntity = WayPoint.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<WayPoint> waypoints = new HashSet<>();
 
 	public GPS() {

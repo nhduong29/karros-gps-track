@@ -2,16 +2,17 @@ package com.example.demo.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "file")
@@ -30,11 +31,12 @@ public class File {
 
 	private Date uploadDate;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "gps_id", referencedColumnName = "id", nullable = true)
+	@OneToOne
+	@MapsId
 	private GPS gps;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonBackReference
+	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = true)
 	private User user;
 

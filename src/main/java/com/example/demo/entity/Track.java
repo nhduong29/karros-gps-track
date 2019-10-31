@@ -15,22 +15,28 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "track")
 public class Track {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Size(max = 10000)
 	private String name;
 
 	@Size(max = 10000)
 	private String description;
 
-	@OneToMany(mappedBy = "track", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
+	@OneToMany(mappedBy = "track", targetEntity = TrackSegment.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<TrackSegment> trackSegments = new HashSet<>();
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonBackReference
+	@ManyToOne
 	@JoinColumn(name = "gps_id", nullable = false)
 	private GPS gps;
 

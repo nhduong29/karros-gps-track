@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,6 +20,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }),
@@ -50,7 +53,8 @@ public class User {
 	@JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles = new HashSet<>();
 
-	@OneToMany(mappedBy = "user")
+	@JsonManagedReference
+	@OneToMany(mappedBy = "user", targetEntity = File.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Set<File> files = new HashSet<>();
 
 	public User(Long id, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 20) String username,
