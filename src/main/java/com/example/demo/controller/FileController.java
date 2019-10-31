@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +39,11 @@ public class FileController {
 	}
 
 	@GetMapping("/downloadFile/{fileId}")
-	public ResponseEntity<Resource> downloadFile(@PathVariable Long fileId) {
+	public ResponseEntity<?> downloadFile(@PathVariable Long fileId) {
 		File dbFile = fileStorageService.getFile(fileId);
+		if (Objects.isNull(dbFile)) {
+			return new ResponseEntity<>("File is not exist", HttpStatus.NOT_FOUND);
+		}
 
 		return ResponseEntity.ok().contentType(MediaType.parseMediaType(dbFile.getType()))
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getName() + "\"")

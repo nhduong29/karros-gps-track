@@ -19,7 +19,6 @@ import com.example.demo.entity.User;
 import com.example.demo.repo.FileRepository;
 import com.example.demo.repo.GpsRepository;
 import com.example.demo.repo.UserRepository;
-import com.example.demo.rest.exception.FileNotFoundException;
 import com.example.demo.rest.exception.FileStorageException;
 import com.example.demo.service.FileStorageService;
 import com.example.demo.service.GPSParserService;
@@ -65,8 +64,14 @@ public class FileStorageServiceImplement implements FileStorageService {
 
 	@Override
 	public File getFile(Long fileId) {
-		return fileRepository.findById(fileId)
-				.orElseThrow(() -> new FileNotFoundException("File not found with id " + fileId));
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			User user = new User();
+			String username = ((CustomUserDetail) principal).getUsername();
+			user = userRepository.findByUsername(username).orElse(new User());
+			return fileRepository.getFileMe(fileId, user.getId());
+		}
+		return null;
 	}
 
 }
