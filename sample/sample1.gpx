@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="gpxgenerator.com">
+<metadata>
+		<name>Test GPX 1</name>
+	<desc>Test Desc 1</desc>
+	<author></author>
+	<link href="http://www.oruxmaps.com">
+		<text>OruxMaps</text>
+	</link>
+	<time>2017-10-22T09:41:33Z</time>
+</metadata>
+<wpt lat="52.22035967046607" lon="5.10589599609375">
+    <ele>12.22</ele>
+    <time>2019-10-31T03:37:06Z</time>
+</wpt>
+<wpt lat="52.30693050335937" lon="5.272064208984375">
+    <ele>0.30</ele>
+    <time>2019-10-31T06:33:53Z</time>
+</wpt>
+<wpt lat="52.32707807275493" lon="5.428619384765625">
+    <ele>-3.26</ele>
+    <time>2019-10-31T08:43:20Z</time>
+</wpt>
+<wpt lat="52.195113074600165" lon="5.478057861328125">
+    <ele>2.64</ele>
+    <time>2019-10-31T11:42:32Z</time>
+</wpt>
+<wpt lat="52.15805878036738" lon="5.350341796875">
+    <ele>6.08</ele>
+    <time>2019-10-31T13:37:13Z</time>
+</wpt>
+<wpt lat="52.16395584656302" lon="5.195159912109375">
+    <ele>19.24</ele>
+    <time>2019-10-31T15:43:28Z</time>
+</wpt>
+<wpt lat="52.35224963750243" lon="5.574188232421875">
+    <ele>-3.00</ele>
+    <time>2019-10-31T22:18:58Z</time>
+</wpt>
+</gpx>

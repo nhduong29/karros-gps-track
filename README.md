@@ -33,42 +33,55 @@ INSERT INTO roles(name) VALUES('ROLE_USER');INSERT INTO roles(name) VALUES('ROLE
 Plase import file `AirlineBooking.postman_collection.json` to Postman.
 
 ####  RESTful API
-## You can import the postman collection in folder `postman\GPS Track.postman_collection.json` to your Postman app to run the api demo
+##### You can import the postman collection in folder `postman\GPS Track.postman_collection.json` to your Postman app to run the api demo
 
-- Sign up
--- API: POST ```/api/auth/signup```
--- Request body: ```{
+##### Sign up
+- API: POST ```/api/auth/signup```
+- Request body: ```{
 	"name" : "Duong Nguyen",
 	"username" : "nhduong29",
 	"email" : "nhduong29@gmail.com",
 	"password" : "000000"
 }```
-- Sign in
--- API: GET ```/api/auth/signin```
--- Request body: ```{
+
+
+
+##### Sign in
+- API: GET ```/api/auth/signin```
+- Request body: ```{
 	"username" : "nhduong29",
 	"password" : "123456"
 }```
 
-- Get User info
--- API: GET ```/api/users/nhduong1```
 
-- Return a list of "Latest track" from our users
--- API: GET ```/api/gps/tracks?page=0&size=20&oderBy=uploadDate&direction=desc```
--- PARAM: 
+
+
+
+##### Get User info
+- API: GET ```/api/users/nhduong1```
+
+##### Return a list of "Latest track" from our users
+- API: GET ```/api/gps/tracks?page=0&size=20&oderBy=uploadDate&direction=desc```
+- PARAM: 
 ------ ```page``` : ```page number```
 ------ ```size``` : ```number of items per page```
 ------ ```oderBy``` : ```field to order [id,name,uploadDate,uploadBy]```
 ------ ```direction``` : ```sort direction```
 
-- Get detail of GPX
--- API: GET ```/api/gps/{gpxId}```
 
 
-- Upload File
--- API: POST ```/api/file/uploadFile```
--- Request body: `form-data, parram name: file`
+##### Get detail of GPX
+- API: GET ```/api/gps/{gpxId}```
 
-- Download file
--- API: GET ```api/file/downloadFile/{fileId}```
+
+
+##### Upload File
+- API: POST ```/api/file/uploadFile```
+- Request body: `form-data, parram name: file`
+
+
+
+##### Download file
+
+- API: GET ```api/file/downloadFile/{fileId}```
 
