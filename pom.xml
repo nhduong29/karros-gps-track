@@ -64,12 +64,11 @@
 		
 		<!-- GPX Parser -->
 		<dependency>
-			<groupId>jpx</groupId>
+			<groupId>io.jenetics</groupId>
 			<artifactId>jpx</artifactId>
-			<scope>system</scope>
 			<version>1.5.3</version>
-			<systemPath>${basedir}\libs\jpx-1.5.3.jar</systemPath>
 		</dependency>
+
 	</dependencies>
 
 	<build>
